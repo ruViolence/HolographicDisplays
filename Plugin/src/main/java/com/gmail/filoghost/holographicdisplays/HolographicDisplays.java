@@ -19,7 +19,6 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.bstats.bukkit.MetricsLite;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -160,10 +159,6 @@ public class HolographicDisplays extends JavaPlugin {
 		getCommand("holograms").setExecutor(commandHandler = new HologramsCommandHandler());
 		Bukkit.getPluginManager().registerEvents(mainListener = new MainListener(nmsManager), this);
 
-		// Register bStats metrics
-		int pluginID = 3123;
-		new MetricsLite(this, pluginID);
-		
 		// Holograms are loaded later, when the worlds are ready.
 		Bukkit.getScheduler().runTask(this, new StartupLoadHologramsTask());
 		
