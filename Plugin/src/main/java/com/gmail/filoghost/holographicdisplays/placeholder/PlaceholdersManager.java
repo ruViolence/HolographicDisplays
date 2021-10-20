@@ -20,7 +20,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,7 +31,6 @@ import com.gmail.filoghost.holographicdisplays.bridge.bungeecord.BungeeServerTra
 import com.gmail.filoghost.holographicdisplays.nms.interfaces.entity.NMSNameable;
 import com.gmail.filoghost.holographicdisplays.object.line.CraftTextLine;
 import com.gmail.filoghost.holographicdisplays.task.WorldPlayerCounterTask;
-import com.gmail.filoghost.holographicdisplays.util.ConsoleLogger;
 import com.gmail.filoghost.holographicdisplays.util.Utils;
 
 public class PlaceholdersManager {
@@ -59,22 +57,6 @@ public class PlaceholdersManager {
 	
 	public static void load(Plugin plugin) {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
-			
-			for (Placeholder placeholder : PlaceholdersRegister.getPlaceholders()) {
-				if (elapsedTenthsOfSecond % placeholder.getTenthsToRefresh() == 0) {
-					try {
-						placeholder.update();
-					} catch (Throwable t) {
-						ConsoleLogger.log(Level.WARNING, "The placeholder " + placeholder.getTextPlaceholder() + " registered by the plugin " + placeholder.getOwner().getName() + " generated an exception while updating. Please contact the author of " + placeholder.getOwner().getName(), t);
-					}
-				}
-			}
-			
-			for (Placeholder placeholder : AnimationsRegister.getAnimations().values()) {
-				if (elapsedTenthsOfSecond % placeholder.getTenthsToRefresh() == 0) {
-					placeholder.update();
-				}
-			}
 			
 			Iterator<DynamicLineData> iter = linesToUpdate.iterator();
 			DynamicLineData currentLineData;

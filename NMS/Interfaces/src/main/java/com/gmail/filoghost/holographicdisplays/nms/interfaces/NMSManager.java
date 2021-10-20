@@ -43,4 +43,6 @@ public interface NMSManager {
 
 	public Object replaceCustomNameText(Object customNameObject, String target, String replacement);
 
+	public default int getCurrentTick() {throw new UnsupportedOperationException("Not implemented.");}
+
 }

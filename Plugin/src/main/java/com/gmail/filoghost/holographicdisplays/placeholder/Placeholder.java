@@ -14,9 +14,13 @@
  */
 package com.gmail.filoghost.holographicdisplays.placeholder;
 
+import com.gmail.filoghost.holographicdisplays.HolographicDisplays;
+import com.gmail.filoghost.holographicdisplays.util.ConsoleLogger;
 import org.bukkit.plugin.Plugin;
 
 import com.gmail.filoghost.holographicdisplays.api.placeholder.PlaceholderReplacer;
+
+import java.util.logging.Level;
 
 public class Placeholder {
 	
@@ -33,6 +37,8 @@ public class Placeholder {
 	private String currentReplacement;
 	
 	private PlaceholderReplacer replacer;
+
+	private int lastUpdateTick = 0;
 	
 	public Placeholder(Plugin owner, String textPlaceholder, double refreshRate, PlaceholderReplacer replacer) {
 		this.owner = owner;
@@ -59,6 +65,15 @@ public class Placeholder {
 	}
 	
 	public String getCurrentReplacement() {
+		int currentTick = HolographicDisplays.getNMSManager().getCurrentTick();
+		if (currentTick != lastUpdateTick && currentTick % getTenthsToRefresh() == 0) {
+			lastUpdateTick = currentTick;
+			try {
+				update();
+			} catch (Throwable t) {
+				ConsoleLogger.log(Level.WARNING, "The placeholder " + getTextPlaceholder() + " registered by the plugin " + getOwner().getName() + " generated an exception while updating. Please contact the author of " + getOwner().getName(), t);
+			}
+		}
 		return currentReplacement;
 	}
 	
