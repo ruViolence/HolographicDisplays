@@ -23,6 +23,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
@@ -332,19 +333,19 @@ public class PlaceholdersManager {
 		
 		if (!lineData.getPlaceholders().isEmpty()) {
 			for (Placeholder placeholder : lineData.getPlaceholders()) {
-				newCustomName = newCustomName.replace(placeholder.getTextPlaceholder(), Utils.sanitize(placeholder.getCurrentReplacement()));
+				newCustomName = StringUtils.replace(newCustomName, placeholder.getTextPlaceholder(), Utils.sanitize(placeholder.getCurrentReplacement()));
 			}
 		}
 		
 		if (!lineData.getReplacers().isEmpty()) {
 			for (Entry<String, PlaceholderReplacer> entry : lineData.getReplacers().entrySet()) {
-				newCustomName = newCustomName.replace(entry.getKey(), Utils.sanitize(entry.getValue().update()));
+				newCustomName = StringUtils.replace(newCustomName, entry.getKey(), Utils.sanitize(entry.getValue().update()));
 			}
 		}
 		
 		if (!lineData.getAnimations().isEmpty()) {
 			for (Entry<String, Placeholder> entry : lineData.getAnimations().entrySet()) {
-				newCustomName = newCustomName.replace(entry.getKey(), Utils.sanitize(entry.getValue().getCurrentReplacement()));
+				newCustomName = StringUtils.replace(newCustomName, entry.getKey(), Utils.sanitize(entry.getValue().getCurrentReplacement()));
 			}
 		}
 		
