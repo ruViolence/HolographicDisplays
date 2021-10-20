@@ -63,7 +63,12 @@ public class EntityNMSArmorStand extends EntityArmorStand implements NMSArmorSta
 			this.onGround = false;
 		}
 	}
-	
+
+	@Override
+	public void postTick() {
+		// Disable portal tick
+	}
+
 	@Override
 	public void inactiveTick() {
 		// Disable normal ticking for this entity.

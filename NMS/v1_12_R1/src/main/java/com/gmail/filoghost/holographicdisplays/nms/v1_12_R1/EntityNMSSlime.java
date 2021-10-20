@@ -60,7 +60,12 @@ public class EntityNMSSlime extends EntitySlime implements NMSSlime {
 		// So it won't get removed.
 		ticksLived = 0;
 	}
-	
+
+	@Override
+	public void postTick() {
+		// Disable portal tick
+	}
+
 	@Override
 	public void inactiveTick() {
 		// Disable normal ticking for this entity.
