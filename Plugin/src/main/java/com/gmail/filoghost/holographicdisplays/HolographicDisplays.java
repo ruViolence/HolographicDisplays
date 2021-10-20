@@ -46,8 +46,6 @@ import com.gmail.filoghost.holographicdisplays.util.ConsoleLogger;
 import com.gmail.filoghost.holographicdisplays.util.NMSVersion;
 import com.gmail.filoghost.holographicdisplays.util.VersionUtils;
 
-import me.filoghost.updatechecker.UpdateChecker;
-
 public class HolographicDisplays extends JavaPlugin {
 	
 	// The main instance of the plugin.
@@ -61,9 +59,6 @@ public class HolographicDisplays extends JavaPlugin {
 	
 	// The command handler, just in case a plugin wants to register more commands.
 	private static HologramsCommandHandler commandHandler;
-	
-	// The new version found by the updater, null if there is no new version.
-	private static String newVersion;
 	
 	// Not null if ProtocolLib is installed and successfully loaded.
 	private static ProtocolLibHook protocolLibHook;
@@ -85,15 +80,6 @@ public class HolographicDisplays extends JavaPlugin {
 
 		// Load the configuration.
 		Configuration.load(this);
-		
-		if (Configuration.updateNotification) {
-			UpdateChecker.run(this, 75097, (String newVersion) -> {
-				HolographicDisplays.newVersion = newVersion;
-				ConsoleLogger.log(Level.INFO, "Found a new version available: " + newVersion);
-				ConsoleLogger.log(Level.INFO, "Download it on Bukkit Dev:");
-				ConsoleLogger.log(Level.INFO, "dev.bukkit.org/projects/holographic-displays");
-			});
-		}
 		
 		// The bungee chat API is required.
 		try {
@@ -214,11 +200,6 @@ public class HolographicDisplays extends JavaPlugin {
 	}
 
 
-	public static String getNewVersion() {
-		return newVersion;
-	}
-	
-	
 	public void hookProtocolLib() {
 		if (!Bukkit.getPluginManager().isPluginEnabled("ProtocolLib")) {
 			return;

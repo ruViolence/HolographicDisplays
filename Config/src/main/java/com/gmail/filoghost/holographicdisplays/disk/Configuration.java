@@ -41,7 +41,6 @@ public class Configuration {
 	public static boolean quickEditCommands;
 	public static String imageSymbol;
 	public static String transparencySymbol;
-	public static boolean updateNotification;
 	public static ChatColor transparencyColor;
 	
 	public static SimpleDateFormat timeFormat;
@@ -129,8 +128,6 @@ public class Configuration {
 		
 		spaceBetweenLines = config.getDouble(ConfigNode.SPACE_BETWEEN_LINES.getPath());
 		quickEditCommands = config.getBoolean(ConfigNode.QUICK_EDIT_COMMANDS.getPath());
-		
-		updateNotification = config.getBoolean(ConfigNode.UPDATE_NOTIFICATION.getPath());
 		
 		imageSymbol = StringConverter.toReadableFormat(config.getString(ConfigNode.IMAGES_SYMBOL.getPath()));
 		transparencySymbol = StringConverter.toReadableFormat(config.getString(ConfigNode.TRANSPARENCY_SPACE.getPath()));

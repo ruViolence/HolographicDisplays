@@ -16,5 +16,4 @@ bungee:
 time:
   format: H:mm
   zone: GMT+1
-update-notification: true
 debug: false

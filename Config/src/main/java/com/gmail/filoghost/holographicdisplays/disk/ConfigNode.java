@@ -23,7 +23,6 @@ public enum ConfigNode {
 	IMAGES_SYMBOL("images.symbol", "[x]"),
 	TRANSPARENCY_SPACE("images.transparency.space", " [|] "),
 	TRANSPARENCY_COLOR("images.transparency.color", "&7"),
-	UPDATE_NOTIFICATION("update-notification", true),
 	BUNGEE_REFRESH_SECONDS("bungee.refresh-seconds", 3),
 	BUNGEE_USE_REDIS_BUNGEE("bungee.use-RedisBungee", false),
 	BUNGEE_USE_FULL_PINGER("bungee.pinger.enable", false),

@@ -173,12 +173,6 @@
 				<version>4.7.0</version>
 				<scope>provided</scope>
 			</dependency>
-	
-			<dependency>
-				<groupId>me.filoghost.updatechecker</groupId>
-				<artifactId>updatechecker</artifactId>
-				<version>1.0.0</version>
-			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
