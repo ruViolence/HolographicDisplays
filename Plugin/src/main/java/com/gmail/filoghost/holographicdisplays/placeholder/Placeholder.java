@@ -38,7 +38,7 @@ public class Placeholder {
 	
 	private PlaceholderReplacer replacer;
 
-	private int lastUpdateTick = 0;
+	private int nextUpdateTick = 0;
 	
 	public Placeholder(Plugin owner, String textPlaceholder, double refreshRate, PlaceholderReplacer replacer) {
 		this.owner = owner;
@@ -66,8 +66,8 @@ public class Placeholder {
 	
 	public String getCurrentReplacement() {
 		int currentTick = HolographicDisplays.getNMSManager().getCurrentTick();
-		if (currentTick != lastUpdateTick && currentTick % getTenthsToRefresh() == 0) {
-			lastUpdateTick = currentTick;
+        if (currentTick >= nextUpdateTick) {
+            nextUpdateTick = currentTick + getTenthsToRefresh() * 2;
 			try {
 				update();
 			} catch (Throwable t) {
