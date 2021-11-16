@@ -17,6 +17,8 @@ package com.gmail.filoghost.holographicdisplays.nms.v1_16_R3;
 import java.util.List;
 
 import java.util.Map;
+
+import net.minecraft.server.v1_16_R3.MinecraftServer;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.v1_16_R3.CraftWorld;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftEntity;
@@ -152,6 +154,11 @@ public class NmsManagerImpl implements NMSManager {
 		return CustomNameHelper.replaceCustomNameChatComponent(NMSChatComponentAdapter.INSTANCE, customNameObject, target, replacement);
 	}
 	
+	@Override
+	public int getCurrentTick() {
+		return MinecraftServer.currentTick;
+	}
+
 	private static enum NMSChatComponentAdapter implements ChatComponentAdapter<IChatBaseComponent> {
 
 		INSTANCE {

@@ -16,6 +16,7 @@ package com.gmail.filoghost.holographicdisplays.nms.v1_11_R1;
 
 import java.lang.reflect.Method;
 
+import net.minecraft.server.v1_11_R1.MinecraftServer;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.v1_11_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_11_R1.entity.CraftEntity;
@@ -160,6 +161,11 @@ public class NmsManagerImpl implements NMSManager {
 	@Override
 	public Object replaceCustomNameText(Object customNameObject, String target, String replacement) {
 		return CustomNameHelper.replaceCustomNameString(customNameObject, target, replacement);
+	}
+
+	@Override
+	public int getCurrentTick() {
+		return MinecraftServer.currentTick;
 	}
 
 }

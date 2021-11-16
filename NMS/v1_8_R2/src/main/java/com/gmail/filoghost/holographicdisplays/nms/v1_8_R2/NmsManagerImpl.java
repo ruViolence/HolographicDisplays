@@ -17,6 +17,7 @@ package com.gmail.filoghost.holographicdisplays.nms.v1_8_R2;
 import java.lang.reflect.Method;
 import java.util.Map;
 
+import net.minecraft.server.v1_8_R2.MinecraftServer;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.v1_8_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R2.entity.CraftEntity;
@@ -158,4 +159,9 @@ public class NmsManagerImpl implements NMSManager {
 		return CustomNameHelper.replaceCustomNameString(customNameObject, target, replacement);
 	}
 	
+	@Override
+	public int getCurrentTick() {
+		return MinecraftServer.currentTick;
+	}
+
 }

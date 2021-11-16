@@ -27,6 +27,7 @@ import com.gmail.filoghost.holographicdisplays.util.ConsoleLogger;
 import com.gmail.filoghost.holographicdisplays.util.Validator;
 import net.minecraft.network.chat.ChatComponentText;
 import net.minecraft.network.chat.IChatBaseComponent;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.WorldServer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.entity.Entity;
@@ -132,6 +133,11 @@ public class NmsManagerImpl implements NMSManager {
 		return CustomNameHelper.replaceCustomNameChatComponent(NMSChatComponentAdapter.INSTANCE, customNameObject, target, replacement);
 	}
 	
+	@Override
+	public int getCurrentTick() {
+		return MinecraftServer.currentTick;
+	}
+
 	private static enum NMSChatComponentAdapter implements ChatComponentAdapter<IChatBaseComponent> {
 
 		INSTANCE {
