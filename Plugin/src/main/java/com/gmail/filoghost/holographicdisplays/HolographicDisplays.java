@@ -63,6 +63,9 @@ public class HolographicDisplays extends JavaPlugin {
 	// Not null if ProtocolLib is installed and successfully loaded.
 	private static ProtocolLibHook protocolLibHook;
 	
+	// Not null if PlaceholderAPI is installed and successfully loaded.
+	private static boolean hasPlaceholderAPI;
+	
 	@Override
 	public void onEnable() {
 		
@@ -118,6 +121,12 @@ public class HolographicDisplays extends JavaPlugin {
 		
 		// ProtocolLib check.
 		hookProtocolLib();
+		
+		// PlaceholderAPI check.
+		try {
+			Class.forName("me.clip.placeholderapi.PlaceholderAPI");
+			hasPlaceholderAPI = true;
+		} catch (ClassNotFoundException ignored) {}
 		
 		// Load animation files and the placeholder manager.
 		PlaceholdersManager.load(this);
@@ -249,6 +258,11 @@ public class HolographicDisplays extends JavaPlugin {
 	
 	public static ProtocolLibHook getProtocolLibHook() {
 		return protocolLibHook;
+	}
+	
+	
+	public static boolean hasPlaceholderAPI() {
+		return hasPlaceholderAPI;
 	}
 	
 	

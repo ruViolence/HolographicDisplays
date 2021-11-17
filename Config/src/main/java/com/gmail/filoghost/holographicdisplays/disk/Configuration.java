@@ -55,6 +55,8 @@ public class Configuration {
 	public static String pingerStatusOffline;
 	public static boolean pingerTrimMotd;
 	public static Map<String, ServerAddress> pingerServers;
+	
+	public static boolean usePlaceholderAPI;
 
 	
 	public static void load(Plugin plugin) {
@@ -141,6 +143,8 @@ public class Configuration {
 		pingerOfflineMotd = StringConverter.toReadableFormat(config.getString(ConfigNode.BUNGEE_PINGER_OFFLINE_MOTD.getPath()));
 		pingerStatusOnline = StringConverter.toReadableFormat(config.getString(ConfigNode.BUNGEE_PINGER_ONLINE_FORMAT.getPath()));
 		pingerStatusOffline = StringConverter.toReadableFormat(config.getString(ConfigNode.BUNGEE_PINGER_OFFLINE_FORMAT.getPath()));
+		
+		usePlaceholderAPI = config.getBoolean(ConfigNode.USE_PLACEHOLDERAPI.getPath());
 		
 		if (pingerTimeout <= 0) {
 			pingerTimeout = 100;

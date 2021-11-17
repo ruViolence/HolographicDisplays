@@ -4,7 +4,7 @@ author: filoghost
 version: ${project.pluginVersion}
 api-version: 1.13
 
-softdepend: [ProtocolLib]
+softdepend: [PlaceholderAPI, ProtocolLib]
 
 commands:
    holograms:

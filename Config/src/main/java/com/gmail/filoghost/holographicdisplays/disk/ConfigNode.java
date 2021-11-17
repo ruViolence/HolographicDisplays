@@ -34,6 +34,7 @@ public enum ConfigNode {
 	BUNGEE_PINGER_SERVERS("bungee.pinger.servers", Arrays.asList("hub: 127.0.0.1:25565", "survival: 127.0.0.1:25566", "minigames: 127.0.0.1:25567")),
 	TIME_FORMAT("time.format", "H:mm"),
 	TIME_ZONE("time.zone", "GMT+1"),
+	USE_PLACEHOLDERAPI("use-placeholderapi", false),
 	DEBUG("debug", false);
 	
 	private final String path;

@@ -16,4 +16,5 @@ bungee:
 time:
   format: H:mm
   zone: GMT+1
+use-placeholderapi: false
 debug: false

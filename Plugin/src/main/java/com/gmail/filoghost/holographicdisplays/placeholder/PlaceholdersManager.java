@@ -27,18 +27,22 @@ import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
+import com.gmail.filoghost.holographicdisplays.HolographicDisplays;
 import com.gmail.filoghost.holographicdisplays.api.placeholder.PlaceholderReplacer;
 import com.gmail.filoghost.holographicdisplays.bridge.bungeecord.BungeeServerTracker;
+import com.gmail.filoghost.holographicdisplays.disk.Configuration;
 import com.gmail.filoghost.holographicdisplays.nms.interfaces.entity.NMSNameable;
 import com.gmail.filoghost.holographicdisplays.object.line.CraftTextLine;
 import com.gmail.filoghost.holographicdisplays.task.WorldPlayerCounterTask;
 import com.gmail.filoghost.holographicdisplays.util.Utils;
+import me.clip.placeholderapi.PlaceholderAPI;
 
 public class PlaceholdersManager {
 	
 	private static long elapsedTenthsOfSecond;
 	protected static Set<DynamicLineData> linesToUpdate = new HashSet<>();
 	
+	private static boolean usingPlaceholderAPI;
 	private static final Pattern BUNGEE_ONLINE_PATTERN = makePlaceholderWithArgsPattern("online");
 	private static final Pattern BUNGEE_MAX_PATTERN = makePlaceholderWithArgsPattern("max_players");
 	private static final Pattern BUNGEE_MOTD_PATTERN = makePlaceholderWithArgsPattern("motd");
@@ -57,6 +61,7 @@ public class PlaceholdersManager {
 	
 	
 	public static void load(Plugin plugin) {
+		usingPlaceholderAPI = HolographicDisplays.hasPlaceholderAPI() && Configuration.usePlaceholderAPI;
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
 			
 			Iterator<DynamicLineData> iter = linesToUpdate.iterator();
@@ -115,6 +120,7 @@ public class PlaceholdersManager {
 		Map<String, PlaceholderReplacer> bungeeReplacers = null;
 		Map<String, PlaceholderReplacer> worldsOnlinePlayersReplacers = null;
 		Map<String, Placeholder> animationsPlaceholders = null;
+		boolean hasPapiPlaceholders = false;
 		
 		Matcher matcher;
 		
@@ -289,7 +295,14 @@ public class PlaceholdersManager {
 			}
 		}
 		
-		if (Utils.isThereNonNull(normalPlaceholders, bungeeReplacers, worldsOnlinePlayersReplacers, animationsPlaceholders)) {
+		if (usingPlaceholderAPI) {
+			matcher = PlaceholderAPI.getPlaceholderPattern().matcher(name);
+			if (matcher.find()) {
+				hasPapiPlaceholders = true;
+			}
+		}
+		
+		if (hasPapiPlaceholders || Utils.isThereNonNull(normalPlaceholders, bungeeReplacers, worldsOnlinePlayersReplacers, animationsPlaceholders)) {
 			
 			DynamicLineData lineData = new DynamicLineData(nameableEntity, name);
 			
@@ -347,6 +360,10 @@ public class PlaceholdersManager {
 			for (Entry<String, Placeholder> entry : lineData.getAnimations().entrySet()) {
 				newCustomName = StringUtils.replace(newCustomName, entry.getKey(), Utils.sanitize(entry.getValue().getCurrentReplacement()));
 			}
+		}
+		
+		if (usingPlaceholderAPI) {
+			newCustomName = PlaceholderAPI.setPlaceholders(null, newCustomName);
 		}
 		
 		// Update only if needed, don't send useless packets.
